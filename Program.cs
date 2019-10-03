@@ -20,7 +20,7 @@ namespace NUnitReporter
         public class Batch : BatchBase
         {
             [Command(new []{ "slack-block" })]
-            public void MakeSlackBlock([Option(0)]string file, [Option("-o", "output file path\noutput file is json")]string outputFile, string repository, string commitSha)
+            public void MakeSlackBlock([Option(0)]string file, [Option("-o", "output file path\noutput file is json")]string outputFile, [Option("-r", "UserName & Repository")]string repository, [Option("-c", "Commit SHA")]string commitSha)
             {
                 var doc = new XmlDocument();
                 doc.Load(file);
