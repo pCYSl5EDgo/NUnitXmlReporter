@@ -54,7 +54,7 @@ namespace NUnitReporter
                         writer.Write(@"{""text"":");
                         writer.Write(Encoding.UTF8.GetString(JsonSerializer.Serialize(new ConsoleEncoder().Encode(doc, out var success))));
                         writer.Write(@",""blocks"":[");
-                        writer.Write(new BlockEncoder(args[3], args[4]).Encode(doc, out _));
+                        writer.Write(new BlockEncoder(args[3], args[4], args.Length >= 6 ? args[5] : "ACTION").Encode(doc, out _));
                         writer.Write("]}");
                         return success ? 0 : 2;
                     }

@@ -11,11 +11,13 @@ namespace NUnitReporter
     {
         private readonly string repository;
         private readonly string commitSha;
+        private readonly string title;
 
-        public BlockEncoder(string repository, string commitSha)
+        public BlockEncoder(string repository, string commitSha, string title)
         {
             this.repository = repository;
             this.commitSha = commitSha;
+            this.title = title;
         }
         public string Encode(XmlDocument document, out bool success)
         {
@@ -30,7 +32,9 @@ namespace NUnitReporter
                     .Append(repository)
                     .Append("/commit/")
                     .Append(commitSha)
-                    .Append(success ? "/checks|*ACTION SUCCESS*>" : "/checks|*ACTION FAIL*>")
+                    .Append("/checks|*")
+                    .Append(title)
+                    .Append(success ? " SUCCESS*>" : " FAIL*>")
                     .Append("\n\ntest case count : ")
                     .Append(root.GetAttribute("testcasecount"))
                     .Append("\ntotal : ")
